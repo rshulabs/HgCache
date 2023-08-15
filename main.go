@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/rshulabs/HgCache/hgcache"
+	"github.com/rshulabs/HgCache/v1/hgcache"
 )
 
 var db = map[string]string{
@@ -15,8 +15,8 @@ var db = map[string]string{
 	"Sam":  "567",
 }
 
-func createGroup() *hgcache.Group {
-	return hgcache.NewGroup("scores", 2<<10, hgcache.GetterFunc(func(key string) ([]byte, error) {
+func createGroup(name string) *hgcache.Group {
+	return hgcache.NewGroup(name, 2<<10, hgcache.GetterFunc(func(key string) ([]byte, error) {
 		log.Println("[SlowDB] search key", key)
 		if v, ok := db[key]; ok {
 			return []byte(v), nil
@@ -65,7 +65,7 @@ func main() {
 	for _, v := range addrMap {
 		addrs = append(addrs, v)
 	}
-	g := createGroup()
+	g := createGroup("test")
 	if api {
 		go startApiServer(apiAddr, g)
 	}

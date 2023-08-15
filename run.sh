@@ -1,5 +1,5 @@
 #!/bin/bash
-trap "rm server;kill 0" EXIT
+trap "rm server;kill 0" EXIT  # 结束删除临时生成文件
 
 go build -o server
 ./server -port=8001 &
