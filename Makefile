@@ -28,12 +28,19 @@ clean:
 .PHONY: codegen
 codegen: 
 	@mkdir -p docs/code
+	@codegen -type=int ./internal/pkg/code
 	@codegen -type=int -doc -output ./docs/code/error_code_generated.md ./internal/pkg/code
 
 # go mod tidy
 .PHONY: tidy
 tidy:
 	@go mod tidy
+
+# complie proto file
+# @protoc -I=. -I=common/pb --go_out=. --go_opt=module=${PKG} --go-grpc_out=. --go-grpc_opt=module=${PKG} apps/*/pb/*.proto
+.PHONY: proto
+proto: 
+	@protoc -I=. --go_out=. --go-grpc_out=. internal/*/impl/pb/*proto
 
 # 运行demo
 .PHONY: run.demo

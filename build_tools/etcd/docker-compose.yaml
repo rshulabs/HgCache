@@ -15,7 +15,7 @@ services:
     #   - "7001:7001"
     privileged: true
     volumes:
-      - "/root/workspace/go/app/HgCache/tools/etcd/data:/bitnami/etcd/data"
+      - "/root/workspace/go/app/HgCache/build_tools/etcd/data:/bitnami/etcd/data"
     environment:
       - "ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379"
       - "ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379"

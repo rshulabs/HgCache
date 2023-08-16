@@ -1,0 +1,14 @@
+app:
+  name: HgCache
+  is_start_http: false
+
+http:
+  host: 192.168.60.34
+  port: 8791
+
+grpc:
+  host: 192.168.60.34
+  port: 9791
+
+etcd:
+  leaseTTL: 10

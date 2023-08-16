@@ -42,13 +42,13 @@ func (m *Map) Add(keys ...string) {
 }
 
 // 获取对应物理节点
-func (m *Map) Get(clientIp string) string {
+func (m *Map) Get(key string) string {
 	// 验证客户端ip
-	if len(clientIp) == 0 {
+	if len(key) == 0 {
 		return ""
 	}
 	// 对客户端ip哈希
-	hash := int(m.hash([]byte(clientIp)))
+	hash := int(m.hash([]byte(key)))
 	// 找到对应虚拟节点索引
 	idx := sort.Search(len(m.keys), func(i int) bool {
 		return m.keys[i] >= hash

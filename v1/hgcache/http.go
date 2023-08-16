@@ -81,10 +81,10 @@ func (p *HttpPool) Set(peers ...string) {
 	}
 }
 
-func (p *HttpPool) PickPeer(clientIp string) (PeerGetter, bool) {
+func (p *HttpPool) PickPeer(key string) (PeerGetter, bool) {
 	p.mu.Lock()
 	defer p.mu.Unlock()
-	if peer := p.peers.Get(clientIp); peer != "" && peer != p.self {
+	if peer := p.peers.Get(key); peer != "" && peer != p.self {
 		p.Log("Pick peer %s", peer)
 		return p.httpGetters[peer], true
 	}
@@ -104,6 +104,7 @@ func (h *httpGetter) Get(in *pb.Request, out *pb.Response) error {
 		url.QueryEscape(in.GetGroup()),
 		url.QueryEscape(in.GetKey()),
 	)
+	fmt.Println(u)
 	res, err := http.Get(u)
 	if err != nil {
 		return err
