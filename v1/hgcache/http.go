@@ -40,10 +40,12 @@ func (p *HttpPool) Log(format string, args ...interface{}) {
 }
 
 func (p *HttpPool) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	// 过滤路由
 	if !strings.HasPrefix(r.URL.Path, p.basePath) {
 		panic("HTTPPool serving unexpected path: " + r.URL.Path)
 	}
 	p.Log("%s %s", r.Method, r.URL.Path)
+	// http://ip:port/basepath/groupname/key
 	parts := strings.SplitN(r.URL.Path[len(p.basePath):], "/", 2)
 	if len(parts) != 2 {
 		http.Error(w, "bad request", http.StatusBadRequest)
@@ -70,6 +72,8 @@ func (p *HttpPool) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Write(body)
 }
 
+// peers
+// http://ip:port
 func (p *HttpPool) Set(peers ...string) {
 	p.mu.Lock()
 	defer p.mu.Unlock()

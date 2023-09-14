@@ -10,9 +10,9 @@ type Hash func(data []byte) uint32
 
 type Map struct {
 	hash     Hash           // 哈希函数，默认crc32.ChecksumIEEE
-	replicas int            // 虚拟节点数
+	replicas int            // 虚拟节点副本数
 	keys     []int          // 哈希环
-	hashMap  map[int]string // 节点映射 虚拟-物理
+	hashMap  map[int]string // 节点映射 散列哈希值虚拟节点-物理
 }
 
 func NewMap(replicas int, fn Hash) *Map {
@@ -30,6 +30,7 @@ func NewMap(replicas int, fn Hash) *Map {
 // 哈希环添加节点
 // 根据物理节点建立映射
 func (m *Map) Add(keys ...string) {
+	// TODO 传参校验
 	for _, key := range keys {
 		for i := 0; i < m.replicas; i++ {
 			hash := int(m.hash([]byte(strconv.Itoa(i) + key)))
@@ -37,13 +38,12 @@ func (m *Map) Add(keys ...string) {
 			m.hashMap[hash] = key
 		}
 	}
-	// 对哈希环排序，便于用二分搜索
 	sort.Ints(m.keys)
 }
 
 // 获取对应物理节点
 func (m *Map) Get(key string) string {
-	// 验证客户端ip
+	// 验证客户端传来查询key
 	if len(key) == 0 {
 		return ""
 	}

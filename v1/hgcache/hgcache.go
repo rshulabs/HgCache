@@ -67,6 +67,7 @@ func GetGroup(name string) *Group {
 
 /*
 主要函数
+
 	获取缓存
 	策略：1,2,3
 	客户端访问-直接从本地缓存中取(本地缓存存在)
@@ -92,6 +93,7 @@ func (g *Group) load(key string) (value BytesView, err error) {
 	view, err := g.loader.Do(key, func() (interface{}, error) {
 		// 判断是否有采取远程调用
 		if g.peers != nil {
+			// 根据key得到远程节点调用方法
 			if peer, ok := g.peers.PickPeer(key); ok {
 				// 判断远程节点是否有数据
 				if value, err := g.getFromPeer(peer, key); err == nil {

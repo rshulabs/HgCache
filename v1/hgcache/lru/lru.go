@@ -5,6 +5,9 @@ lru淘汰算法
 	淘汰最近访问最少的那次
 		数据结构：map[string]dqueue
 		节点被访问，放入队尾，淘汰队首
+TODO
+	实现仿redis缓存lru淘汰策略，随机选取五个，随机再从里面选取最少访问那个
+	拓展：redis lru是在数据呈幂分布时选用，当数据分布比较均衡时，选用random，即随机选取一个淘汰删除
 */
 import "container/list"
 
@@ -53,10 +56,10 @@ func (c *Cache) Get(key string) (value Value, ok bool) {
 }
 
 /*
- 删除
-	取队首，删除节点和对应map
-	更新当前使用内存
-	有回调，调用回调
+	 删除
+		取队首，删除节点和对应map
+		更新当前使用内存
+		有回调，调用回调
 */
 func (c *Cache) RemoveOldest() {
 	// 取出队头
@@ -76,6 +79,7 @@ func (c *Cache) RemoveOldest() {
 
 /*
 增加/修改
+
 	查找key，存在，更新节点并移到队尾
 	不存在，队尾新增节点，map添加记录
 	更新当前使用内存，若超过最大内存，移除最少访问节点

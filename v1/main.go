@@ -26,6 +26,7 @@ func createGroup(name string) *hgcache.Group {
 }
 
 func startCacheServer(addr string, addrs []string, g *hgcache.Group) {
+	// 启动远程缓存节点
 	peers := hgcache.NewHttpPool(addr)
 	peers.Set(addrs...)
 	g.RegisterPeers(peers)
