@@ -1,7 +1,7 @@
 ## 项目简介
 
 - 仿 [groupcache](https://github.com/golang/groupcache) 改造的分布式缓存微服务项目
-- [复盘文档](https://github.com/rshulabs/HgCache/tree/main/docs/cn)
+- [复盘文档](https://github.com/rshulabs/HgCache/blob/main/docs/cn/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98.md)
 
 ## 版本
 
