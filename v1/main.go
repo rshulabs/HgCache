@@ -9,7 +9,7 @@ import (
 	"github.com/rshulabs/HgCache/v1/hgcache"
 )
 
-var db = map[string]string{
+var DB = map[string]string{
 	"Tom":  "630",
 	"Jack": "589",
 	"Sam":  "567",
@@ -18,7 +18,7 @@ var db = map[string]string{
 func createGroup(name string) *hgcache.Group {
 	return hgcache.NewGroup(name, 2<<10, hgcache.GetterFunc(func(key string) ([]byte, error) {
 		log.Println("[SlowDB] search key", key)
-		if v, ok := db[key]; ok {
+		if v, ok := DB[key]; ok {
 			return []byte(v), nil
 		}
 		return nil, fmt.Errorf("%s not exist", key)

@@ -21,6 +21,7 @@ func createGroup(name string) *hgcache.Group {
 		if v, ok := db[key]; ok {
 			return []byte(v), nil
 		}
+
 		return nil, fmt.Errorf("%s not exist", key)
 	}))
 }

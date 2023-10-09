@@ -99,6 +99,7 @@ func (g *Group) load(key string) (value BytesView, err error) {
 				if value, err := g.getFromPeer(peer, key); err == nil {
 					return value, nil
 				}
+				
 				log.Println("[HgCache] Failed to get from peer", err)
 			}
 		}
