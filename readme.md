@@ -2,6 +2,7 @@
 
 - 仿 [groupcache](https://github.com/golang/groupcache) 改造的分布式缓存微服务项目
 - [复盘文档](https://github.com/rshulabs/HgCache/blob/main/docs/cn/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98.md)
+- [线上体验地址](http://rshulabs.v4.idcfengye.com/api?key=Tom)(注：由于服务器是本地电脑（买不起服务器，太穷了），所以大部分时间都可能没有开放，用 k8s 集群部署的实验环境，电脑吃不消~)
 
 ## 版本
 
