@@ -55,11 +55,11 @@ func main() {
 	flag.IntVar(&port, "port", 8001, "hgcache server port")
 	flag.BoolVar(&api, "api", false, "start hgcache")
 	flag.Parse()
-	apiAddr := "http://localhost:8791"
+	apiAddr := "http://0.0.0.0:8791"
 	addrMap := map[int]string{
-		8001: "http://localhost:8001",
-		8002: "http://localhost:8002",
-		8003: "http://localhost:8003",
+		8001: "http://0.0.0.0:8001",
+		8002: "http://0.0.0.0:8002",
+		8003: "http://0.0.0.0:8003",
 	}
 	var addrs []string
 	for _, v := range addrMap {

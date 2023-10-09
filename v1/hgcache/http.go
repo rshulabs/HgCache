@@ -102,6 +102,7 @@ type httpGetter struct {
 }
 
 func (h *httpGetter) Get(in *pb.Request, out *pb.Response) error {
+	// 使用rpc编码
 	u := fmt.Sprintf(
 		"%v%v/%v",
 		h.baseUrl,
@@ -109,6 +110,7 @@ func (h *httpGetter) Get(in *pb.Request, out *pb.Response) error {
 		url.QueryEscape(in.GetKey()),
 	)
 	fmt.Println(u)
+	// 拼接好后发送http请求
 	res, err := http.Get(u)
 	if err != nil {
 		return err
